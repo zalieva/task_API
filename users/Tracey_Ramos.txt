@@ -1,0 +1,1 @@
+{'email': 'tracey.ramos@reqres.in', 'first_name': 'Tracey', 'last_name': 'Ramos', 'avatar': 'https://reqres.in/img/faces/6-image.jpg', 'add_info': {'name': 'blue turquoise', 'year': 2005, 'color': '#53B0AE', 'pantone_value': '15-5217'}}

@@ -1,0 +1,1 @@
+{'email': 'eve.holt@reqres.in', 'first_name': 'Eve', 'last_name': 'Holt', 'avatar': 'https://reqres.in/img/faces/4-image.jpg', 'add_info': {'name': 'aqua sky', 'year': 2003, 'color': '#7BC4C4', 'pantone_value': '14-4811'}}
