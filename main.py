@@ -1,12 +1,8 @@
 import requests
+import os
 
 
-response_users = requests.get('https://reqres.in/api/users').json()
-response_unknown = requests.get('https://reqres.in/api/unknown').json()
-data_users_list = []
-
-
-def parser() -> list:
+def parser(data_users_list, response_users, response_unknown) -> list:
     for user in response_users['data']:
         for add_info in response_unknown['data']:
             additional_info = {}
@@ -20,15 +16,28 @@ def parser() -> list:
     return data_users_list
 
 
-def data_writing(data_users_list):
-    for data_user in data_users_list:
+def data_writing(data_user, file_path):
+    with open(file_path, "w") as file:
         data_user.pop('id')
-        file = open(f'users/{data_user.get("first_name")}_{data_user.get("last_name")}.txt', "w")
         file.write(str(data_user))
-        file.close()
 
 
-data_users = parser()
-data_writing(data_users)
+def check_users_file(data_users_list):
+    for data_user in data_users_list:
+        file_path = f'users/{data_user.get("first_name")}_{data_user.get("last_name")}.txt'
+        if os.access(file_path, os.F_OK) == True:
+            data_writing(data_user, file_path=f'users/{data_user.get("first_name")}_{data_user.get("last_name")}_{data_user.get("id")}.txt')
+        else:
+            data_writing(data_user, file_path)
+
+def main():
+    data_users_list = parser(data_users_list=[], response_users=requests.get('https://reqres.in/api/users').json(),
+           response_unknown=requests.get('https://reqres.in/api/unknown').json())
+    check_users_file(data_users_list)
+
+
+if __name__ == "__main__":
+    main()
+
 
 
